@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const HeroContainer = styled.section`
-  padding-top: 5.875rem;
   display: flex;
   gap: 3.5rem;
+  padding-top: 5.875rem;
+  padding-bottom: 6.75rem;
 `
 export const Background = styled.div`
   z-index: -1;
@@ -20,7 +21,6 @@ export const Background = styled.div`
 export const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 
   h1 {
     font-size: 3rem;
@@ -29,6 +29,7 @@ export const LeftContent = styled.div`
 
   p {
     font-size: 1.25rem;
+    padding-top: 1rem;
   }
 
 `
