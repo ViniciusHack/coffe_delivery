@@ -1,4 +1,4 @@
-import CoffeLogo from '../../assets/coffee-logo.svg';
+import CoffeLogo from '../../assets/coffee_logo.svg';
 import { Button } from "../Button";
 import { ButtonGroup, HeaderContainer } from "./styles";
 
