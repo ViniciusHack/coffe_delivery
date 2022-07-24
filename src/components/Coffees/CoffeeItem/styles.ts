@@ -66,6 +66,7 @@ export const Amount = styled.div`
   display: flex;
   gap: 0.25rem;
   align-items: center;
+  user-select: none;
 
   border-radius: 6px;
   background: ${props => props.theme['base-400']};
