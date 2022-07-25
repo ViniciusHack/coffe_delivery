@@ -23,6 +23,7 @@ export const FormContent = styled.form`
 export const FormHeader = styled.header`
   display: flex;
   gap: 0.5rem;
+  padding-bottom: 2rem;
 
   font-size: 0.875rem;
   h4 {
@@ -37,6 +38,21 @@ export const FormHeader = styled.header`
 
   svg {
     color: ${props => props.theme['primary-700']};
+  }
+`
+
+export const InputsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`
+
+export const InputInLine = styled.div`
+  display: flex;
+  gap: 0.75rem;
+  
+  div {
+    flex: 1;
   }
 `
 
