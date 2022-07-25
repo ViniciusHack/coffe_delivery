@@ -1,4 +1,5 @@
 import { MapPinLine } from "phosphor-react";
+import { Input } from "../../components/Input";
 import { CartItems, CheckoutContainer, FormContainer, FormContent, FormHeader, Payment, Text } from "./styles";
 
 export function Checkout() {
@@ -14,6 +15,7 @@ export function Checkout() {
               <p>Informe o endereço onde deseja receber seu pedido</p>
             </Text>
           </FormHeader>
+          <Input placeholder="CPF" optional/>
         </FormContent>
         <Payment>
 
