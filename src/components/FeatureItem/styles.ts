@@ -1,11 +1,15 @@
 import styled from "styled-components";
-import { ThemeType } from "../../../@types/styles";
+import { ThemeType } from "../../@types/styles";
 
 export const FeatureContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
   min-width: 231px;
+
+  p {
+    font-size: 1rem;
+  }
 `
 
 interface IconBoxProps {
