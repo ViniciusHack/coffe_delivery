@@ -1,6 +1,8 @@
-import { MapPinLine } from "phosphor-react";
+import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from "phosphor-react";
+import { CoffeeCartItem } from "../../components/CoffeeCartItem";
 import { Input } from "../../components/Input";
-import { CartItems, CheckoutContainer, FormContainer, FormContent, FormHeader, InputInLine, InputsWrapper, Payment, Text } from "./styles";
+import { SelectButton } from "../../components/SelectButton";
+import { CartItemsContainer, CheckoutContainer, Content, FormContainer, FormContent, FormHeader, InputInLine, InputsWrapper, Payment, PaymentMethod, Text } from "./styles";
 
 export function Checkout() {
   return (
@@ -30,12 +32,27 @@ export function Checkout() {
           </InputsWrapper>
         </FormContent>
         <Payment>
-
+         <FormHeader>
+            <CurrencyDollar size={22} />
+            <Text>
+              <h4>Pagamento</h4>
+              <p>O pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
+            </Text>
+          </FormHeader>
+          <PaymentMethod>
+            <SelectButton selected={true} icon={<CreditCard />} text="Cartão de crédito"/>
+            <SelectButton selected={false} icon={<Bank />} text="Cartão de débito"/>
+            <SelectButton selected={false} icon={<Money />} text="Dinheiro"/>
+          </PaymentMethod>
         </Payment>
       </FormContainer>
-      <CartItems>
-
-      </CartItems>
+      <CartItemsContainer>
+        <h3>Cafés selecionados</h3>
+        <Content>
+          <CoffeeCartItem />
+          <CoffeeCartItem />
+        </Content>
+      </CartItemsContainer>
     </CheckoutContainer>
   )
 }

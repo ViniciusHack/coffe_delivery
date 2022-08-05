@@ -61,27 +61,3 @@ export const Actions = styled.div`
   gap: 0.5rem;
   align-items: center;
 `
-
-export const Amount = styled.div`
-  display: flex;
-  gap: 0.25rem;
-  align-items: center;
-  user-select: none;
-
-  border-radius: 6px;
-  background: ${props => props.theme['base-400']};
-
-  padding: 0.5rem;
-
-  button {
-    display: flex;
-    background: transparent;
-    border: 0;
-    outline: 0;
-    color: ${props => props.theme['secondary-400']};
-  }
-
-  span {
-    color: ${props => props.theme['base-900']}
-  }
-`

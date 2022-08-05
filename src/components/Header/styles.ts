@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
-  position: sticky;
-  top: 0;
-
   padding: 2rem 0;
 
   background: ${props => props.theme['base-100']};
@@ -17,7 +14,7 @@ export const HeaderContainer = styled.header`
 
 export const ButtonGroup = styled.div`
   display: flex;
-  gap: .25rem;
+  gap: .75rem;
 
   button {
     flex: 0;
