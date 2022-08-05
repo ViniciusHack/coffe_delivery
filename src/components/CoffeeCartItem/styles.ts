@@ -4,7 +4,8 @@ export const CoffeeCartItemContainer = styled.div`
   hr {
     width: 100%;
     height: 0;
-    border: 1px solid ${props => props.theme["base-400"]};
+    border: 0;
+    border-bottom: 1px solid ${props => props.theme["base-400"]};
     margin: 1.5rem 0;
   }
 `

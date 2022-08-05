@@ -1,8 +1,9 @@
 import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from "phosphor-react";
+import { Button } from "../../components/Button";
 import { CoffeeCartItem } from "../../components/CoffeeCartItem";
 import { Input } from "../../components/Input";
 import { SelectButton } from "../../components/SelectButton";
-import { CartItemsContainer, CheckoutContainer, Content, FormContainer, FormContent, FormHeader, InputInLine, InputsWrapper, Payment, PaymentMethod, Text } from "./styles";
+import { CalcItem, CartItemsContainer, CheckoutContainer, Content, FormContainer, FormContent, FormHeader, InputInLine, InputsWrapper, Payment, PaymentMethod, Text, TotalCalc } from "./styles";
 
 export function Checkout() {
   return (
@@ -51,6 +52,22 @@ export function Checkout() {
         <Content>
           <CoffeeCartItem />
           <CoffeeCartItem />
+        <TotalCalc>
+          <CalcItem>
+            <span>Total de itens</span>
+            <span>R$ 29,70</span>
+          </CalcItem>
+          <CalcItem>
+            <span>Entrega</span>
+            <span>R$ 3,50</span>
+          </CalcItem>
+          <CalcItem>
+            <h3>Total</h3>
+            <h3>R$ 33,20</h3>
+          </CalcItem>
+        </TotalCalc>
+
+        <Button mainColor="yellow" size="lg" variant="default" text="confirmar pedido" />
         </Content>
       </CartItemsContainer>
     </CheckoutContainer>
