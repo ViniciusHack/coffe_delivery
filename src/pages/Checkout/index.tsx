@@ -37,16 +37,16 @@ export function Checkout() {
               </Text>
             </FormHeader>
             <InputsWrapper>
-              <Input placeholder="CPF" width="12.5rem" {...register("cpf")}/>
-              <Input placeholder="Rua" width="35rem" {...register("street")}/>
+              <Input placeholder="CPF" width="12.5rem" register={register("cpf")}/>
+              <Input placeholder="Rua" width="35rem" register={register("street")}/>
               <InputInLine>
-                <Input placeholder="Número" width="12.5rem" {...register("number")}/>
-                <Input placeholder="Complemento" optional {...register("complement")}/>
+                <Input placeholder="Número" width="12.5rem" register={register("number")}/>
+                <Input placeholder="Complemento" optional register={register("complement")}/>
               </InputInLine>
               <InputInLine>
-                <Input placeholder="Bairro" width="12.5rem" {...register("neighborhood")}/>
-                <Input placeholder="Cidade" {...register("city")}/>
-                <Input placeholder="UF" width="5rem" {...register("uf")}/>
+                <Input placeholder="Bairro" width="12.5rem" register={register("neighborhood")}/>
+                <Input placeholder="Cidade" register={register("city")}/>
+                <Input placeholder="UF" width="5rem" register={register("uf")}/>
               </InputInLine>
             </InputsWrapper>
           </AddressForm>
