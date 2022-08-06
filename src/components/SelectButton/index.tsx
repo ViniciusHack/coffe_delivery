@@ -9,7 +9,7 @@ interface SelectButtonInterface {
 
 export function SelectButton({ icon, text, selected }: SelectButtonInterface) {
   return (
-    <SelectButtonContainer selected={selected}>
+    <SelectButtonContainer selected={selected} type="button">
       {icon}
       <p>{text}</p>
     </SelectButtonContainer>

@@ -12,7 +12,6 @@ interface FeatureItemProps {
 
 export function FeatureItem({ icon, text, color, boldText }: FeatureItemProps) {
   const DynamicIcon = phosphor[icon]
-  console.log({boldText})
 
   return (
     <FeatureContainer>
@@ -21,11 +20,10 @@ export function FeatureItem({ icon, text, color, boldText }: FeatureItemProps) {
       </IconBox>
       <div>
         {text.map(line => {
-          const [splicedLine, bold] = boldText ? line.split(boldText) : [];
-          console.log(boldText, bold, splicedLine, line)
-          
+        const [splicedLine] = boldText ? line.split(boldText) : [line];
+        
         return (
-          <p>{splicedLine ? splicedLine : line}{<b>1{bold}</b>}</p>
+          <p key={line}>{splicedLine ? splicedLine : line !== boldText && line}{<b>{splicedLine !== line && boldText}</b>}</p>
         )})}
       </div>
     </FeatureContainer>

@@ -22,12 +22,12 @@ export const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
 
-  h1 {
+  > h1 {
     font-size: 3rem;
     color: ${props => props.theme['base-900']};
   }
 
-  p {
+  > p {
     font-size: 1.25rem;
     padding-top: 1rem;
   }

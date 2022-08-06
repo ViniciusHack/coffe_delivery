@@ -1,52 +1,71 @@
-import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from "phosphor-react";
+import { Bank, CreditCard, MapPinLine, Money } from "phosphor-react";
+import { useForm } from "react-hook-form";
 import { Button } from "../../components/Button";
 import { CoffeeCartItem } from "../../components/CoffeeCartItem";
 import { Input } from "../../components/Input";
 import { SelectButton } from "../../components/SelectButton";
-import { CalcItem, CartItemsContainer, CheckoutContainer, Content, FormContainer, FormContent, FormHeader, InputInLine, InputsWrapper, Payment, PaymentMethod, Text, TotalCalc } from "./styles";
+import { AddressForm, CalcItem, CartItemsContainer, CheckoutContainer, Content, CurrencyDollarStyled, FormContainer, FormHeader, InputInLine, InputsWrapper, Payment, PaymentMethod, Text, TotalCalc } from "./styles";
+
+interface IFormData {
+  cpf: number;
+  street: string;
+  number: number;
+  complement: string;
+  neighborhood: string;
+  city: string;
+  uf: string;
+}
 
 export function Checkout() {
+  const { register, handleSubmit } = useForm<IFormData>();
+
+  const onSubmit = (data: IFormData) => {
+    console.log({ data })
+  }
+
   return (
     <CheckoutContainer>
-      <FormContainer>
-        <h3>Complete seu pedido</h3>
-        <FormContent>
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <h3>Complete seu pedido</h3>
+          <AddressForm>
+            <FormHeader>
+              <MapPinLine size={22} />
+              <Text>
+                <h4>Endereço de Entrega</h4>
+                <p>Informe o endereço onde deseja receber seu pedido</p>
+              </Text>
+            </FormHeader>
+            <InputsWrapper>
+              <Input placeholder="CPF" width="12.5rem" {...register("cpf")}/>
+              <Input placeholder="Rua" width="35rem" {...register("street")}/>
+              <InputInLine>
+                <Input placeholder="Número" width="12.5rem" {...register("number")}/>
+                <Input placeholder="Complemento" optional {...register("complement")}/>
+              </InputInLine>
+              <InputInLine>
+                <Input placeholder="Bairro" width="12.5rem" {...register("neighborhood")}/>
+                <Input placeholder="Cidade" {...register("city")}/>
+                <Input placeholder="UF" width="5rem" {...register("uf")}/>
+              </InputInLine>
+            </InputsWrapper>
+          </AddressForm>
+          <Payment>
           <FormHeader>
-            <MapPinLine size={22} />
-            <Text>
-              <h4>Endereço de Entrega</h4>
-              <p>Informe o endereço onde deseja receber seu pedido</p>
-            </Text>
-          </FormHeader>
-          <InputsWrapper>
-            <Input placeholder="CPF" width="12.5rem"/>
-            <Input placeholder="Rua" width="35rem"/>
-            <InputInLine>
-              <Input placeholder="Número" width="12.5rem"/>
-              <Input placeholder="Complemento" optional/>
-            </InputInLine>
-            <InputInLine>
-              <Input placeholder="Bairro" width="12.5rem"/>
-              <Input placeholder="Cidade"/>
-              <Input placeholder="UF" width="5rem"/>
-            </InputInLine>
-          </InputsWrapper>
-        </FormContent>
-        <Payment>
-         <FormHeader>
-            <CurrencyDollar size={22} />
-            <Text>
-              <h4>Pagamento</h4>
-              <p>O pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
-            </Text>
-          </FormHeader>
-          <PaymentMethod>
-            <SelectButton selected={true} icon={<CreditCard />} text="Cartão de crédito"/>
-            <SelectButton selected={false} icon={<Bank />} text="Cartão de débito"/>
-            <SelectButton selected={false} icon={<Money />} text="Dinheiro"/>
-          </PaymentMethod>
-        </Payment>
-      </FormContainer>
+              <CurrencyDollarStyled size={22} />
+              <Text>
+                <h4>Pagamento</h4>
+                <p>O pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
+              </Text>
+            </FormHeader>
+            <PaymentMethod>
+              <SelectButton selected={true} icon={<CreditCard />} text="Cartão de crédito"/>
+              <SelectButton selected={false} icon={<Bank />} text="Cartão de débito"/>
+              <SelectButton selected={false} icon={<Money />} text="Dinheiro"/>
+            </PaymentMethod>
+          </Payment>
+        </div>
+      
       <CartItemsContainer>
         <h3>Cafés selecionados</h3>
         <Content>
@@ -67,9 +86,10 @@ export function Checkout() {
           </CalcItem>
         </TotalCalc>
 
-        <Button mainColor="yellow" size="lg" variant="default" text="confirmar pedido" />
+        <Button mainColor="yellow" size="lg" variant="default" text="confirmar pedido" type="submit"/>
         </Content>
       </CartItemsContainer>
+      </FormContainer>
     </CheckoutContainer>
   )
 }

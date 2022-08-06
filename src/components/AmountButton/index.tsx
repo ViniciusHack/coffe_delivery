@@ -10,7 +10,7 @@ interface AmountButtonProps {
 export function AmountButton({ amount, setAmount, size }: AmountButtonProps) {
   return (
     <AmountContainer size={size}>
-      <button onClick={() => setAmount(state => {
+      <button type="button" onClick={() => setAmount(state => {
         if(state > 0) {
           state-= 1
         }
@@ -20,7 +20,7 @@ export function AmountButton({ amount, setAmount, size }: AmountButtonProps) {
         <Minus size={14} />
       </button>
       <span>{amount}</span>
-      <button onClick={() => setAmount(state => state+=1)}>
+      <button type="button" onClick={() => setAmount(state => state+=1)}>
         <Plus size={14} />
       </button>
     </AmountContainer>

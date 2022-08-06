@@ -1,20 +1,20 @@
+import { CurrencyDollar } from 'phosphor-react';
 import styled from 'styled-components';
 
 export const CheckoutContainer = styled.div`
-  display: flex;
-  gap: 2rem;
-  padding-top: 2.5rem;
-  
   h3 {
     font-size: 1.125rem;
     font-weight: 700;
   }
 `;
 
-export const FormContainer = styled.section`
+export const FormContainer = styled.form`
+  display: flex;
+  gap: 2rem;
+  padding-top: 2.5rem;
 `
 
-export const FormContent = styled.form`
+export const AddressForm = styled.section`
   margin-top: 1rem;
   padding: 2.5rem;
   background: ${props => props.theme['base-200']};
@@ -109,4 +109,8 @@ export const CalcItem = styled.div`
 
     color: ${props => props.theme['base-800']};
   }
+`
+
+export const CurrencyDollarStyled = styled(CurrencyDollar)`
+  color: ${props => props.theme['secondary-400']} !important;
 `
