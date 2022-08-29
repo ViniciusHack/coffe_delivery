@@ -21,7 +21,16 @@ export function CoffeeItem() {
         <span>R${" "}<strong>9,90</strong></span>
         <Actions>
           <AmountButton amount={itemCount} setAmount={setItemCount} size="md" />
-          <Button mainColor="purple" size="md" variant="default" icon={{ name: "ShoppingCart", weight: 'fill' }}  />
+          <Button
+            mainColor="purple"
+            size="md"
+            onClick={() => {}}
+            variant="default"
+            icon={{
+            name: "ShoppingCart",
+            weight: 'fill'
+            }}
+          />
         </Actions>
       </Footer>
     </CoffeeItemContainer>
