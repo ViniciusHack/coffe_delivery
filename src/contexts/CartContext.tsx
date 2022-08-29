@@ -20,8 +20,6 @@ export const CartContext = createContext({} as CartContextType);
 
 
 export function CartProvider({ children }: CartProviderProps) {
-  // TO DO: Rever aula sobre reducer, nome do type do CartContext
-  // TO DO: Terminar reducer -> Criar Actions e Terminar reducer business logic
   // TO DO: Implementar cart nos componentes (usar suas funções e variáveis...)
   // TO DO: Ver como trabalhar com o JSON Server? tipo salvar o item todo ou buscar do JSON server e só salvar o id?
   // TO DO: React Hook Form Implementation
