@@ -30,7 +30,7 @@ export function CoffeeItem({ id, badges, description, imageUrl, price, title }: 
       <h3>{title}</h3>
       <p>{description}</p>
       <Footer>
-        <span>R${" "}<strong>{price}</strong></span>
+        <span>R${" "}<strong>{Intl.NumberFormat('pt-br').format(price / 100).padEnd(4, "0")}</strong></span>
         <Actions>
           <AmountButton amount={quantity} setAmount={setQuantity} size="md" />
           <Button
