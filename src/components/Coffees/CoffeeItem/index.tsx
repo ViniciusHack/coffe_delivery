@@ -37,10 +37,10 @@ export function CoffeeItem({ id, badges, description, imageUrl, price, title }: 
             mainColor="purple"
             size="md"
             onClick={() => addNewCartItem({
-              id: 0,
-              title: "Expresso Tradicional",
-              imageUrl: "https://fakeimage.com",
-              price_on_cents: 20000,
+              id,
+              title,
+              imageUrl,
+              price_on_cents: price,
               quantity,
             })}
             variant="default"
