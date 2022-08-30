@@ -12,7 +12,6 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   variant: 'default' | 'base' | 'outline',
   size: 'sm' | 'md' | 'lg'
   mainColor: 'yellow' | 'purple',
-  type?: "submit" | "button"
 }
 
 const iconSize = {
@@ -21,11 +20,11 @@ const iconSize = {
   lg: '22'
 }
 
-export function Button({ text, variant, icon, size, mainColor, type = "button" }: ButtonProps) {
+export function Button({ text, variant, icon, size, mainColor, ...rest }: ButtonProps) {
   const DynamicIcon = icon ? phosphor[icon.name] : null
 
   return (
-    <ButtonStyle variant={variant} size={size} mainColor={mainColor} type={type}>
+    <ButtonStyle variant={variant} size={size} mainColor={mainColor} {...rest}>
       {DynamicIcon && <DynamicIcon weight={icon!.weight} size={iconSize[size]}/>}
       {text}
     </ButtonStyle>

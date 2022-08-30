@@ -24,3 +24,29 @@ export const ButtonGroup = styled.div`
     flex: 1;
   }
 `
+
+export const CartButtonContainer = styled.div`
+  position: relative;
+`
+
+export const CartItemQuantityIndicator = styled.div`
+  width: 1.25rem;
+  height: 1.25rem;
+
+  background: ${props => props.theme['primary-700']};
+  color: ${props => props.theme['base-0']};
+
+  display: grid;
+  place-items: center;
+  
+  border-radius: 100%;
+
+  position: absolute;
+  top: -25%;
+  right: -25%;
+
+  span {
+    font-weight: 700;
+    font-size: .75rem;
+  }
+`

@@ -25,8 +25,11 @@ export function CartProvider({ children }: CartProviderProps) {
   // TO DO: React Hook Form Implementation
   // TO DO: Contexto de dados da entrega, pagamento, tempo estimado?
   
+  // Ver o por que de essa variável cart não estar tipada
   const [cart, dispatch] = useReducer(cartReducer, [])
   const cartItemsQuantity = cart.length
+
+  console.log({ cartItemsQuantity })
 
   const addNewCartItem = useCallback((newItem: CartItem) => {
     dispatch(

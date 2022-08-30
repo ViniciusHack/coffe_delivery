@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.3;
-    -webkit-fontsmoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, h4 {
@@ -32,5 +32,9 @@ export const GlobalStyle = createGlobalStyle`
   
   button {
     cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
   }
 `

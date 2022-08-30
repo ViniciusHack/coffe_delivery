@@ -1,30 +1,48 @@
-import { useState } from "react";
-import CoffeeExpress from '../../../assets/coffee_express.svg';
+import { useContext, useState } from "react";
+import { CartContext } from "../../../contexts/CartContext";
 import { AmountButton } from "../../AmountButton";
 import { Button } from "../../Button";
 import { Actions, Badge, CoffeeItemContainer, Footer, ImageBox } from "./styles";
 
-export function CoffeeItem() {
-  const [itemCount, setItemCount] = useState(0);
+interface CoffeeItemProps {
+  id: number;
+  title: string;
+  badges: string[];
+  imageUrl: string;
+  description: string;
+  price: number;
+}
+
+export function CoffeeItem({ id, badges, description, imageUrl, price, title }: CoffeeItemProps) {
+  const { addNewCartItem } = useContext(CartContext);
+  const [quantity, setQuantity] = useState(0);
 
   return (
     <CoffeeItemContainer>
       <ImageBox>
-        <img src={CoffeeExpress} />
+        <img src={imageUrl} />
       </ImageBox>
-      <Badge>
-        Tradicional
-      </Badge>
-      <h3>Expresso Tradicional</h3>
-      <p>O tradicional café feito com água quente e grãos moídos</p>
+      {badges.map(badge => (
+        <Badge>
+          {badge}
+        </Badge>
+      ))}
+      <h3>{title}</h3>
+      <p>{description}</p>
       <Footer>
-        <span>R${" "}<strong>9,90</strong></span>
+        <span>R${" "}<strong>{price}</strong></span>
         <Actions>
-          <AmountButton amount={itemCount} setAmount={setItemCount} size="md" />
+          <AmountButton amount={quantity} setAmount={setQuantity} size="md" />
           <Button
             mainColor="purple"
             size="md"
-            onClick={() => {}}
+            onClick={() => addNewCartItem({
+              id: 0,
+              title: "Expresso Tradicional",
+              imageUrl: "https://fakeimage.com",
+              price_on_cents: 20000,
+              quantity,
+            })}
             variant="default"
             icon={{
             name: "ShoppingCart",

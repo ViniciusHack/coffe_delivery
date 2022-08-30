@@ -13,6 +13,10 @@ export enum CartActionTypes {
 }
 
 export function addNewCartItemAction(newItem: CartItem) {
+  if(newItem.quantity === 0) {
+    return removeCartItemAction(newItem.id)
+  }
+
   return {
     type: CartActionTypes.ADD_NEW_CART_ITEM,
     payload: {
