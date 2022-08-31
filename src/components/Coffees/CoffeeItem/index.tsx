@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useContextSelector } from 'use-context-selector';
 import { CartContext } from "../../../contexts/CartContext";
 import { AmountButton } from "../../AmountButton";
 import { Button } from "../../Button";
@@ -14,7 +15,9 @@ interface CoffeeItemProps {
 }
 
 export function CoffeeItem({ id, badges, description, imageUrl, price, title }: CoffeeItemProps) {
-  const { addNewCartItem } = useContext(CartContext);
+  const addNewCartItem = useContextSelector(CartContext, (context) => {
+    return context.addNewCartItem
+  });
   const [quantity, setQuantity] = useState(0);
 
   return (

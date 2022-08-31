@@ -1,12 +1,10 @@
 import { Bank, CreditCard, MapPinLine, Money } from "phosphor-react";
-import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../components/Button";
-import { CoffeeCartItem } from "../../components/CoffeeCartItem";
+import { CartSummary } from "../../components/CartSummary";
 import { Input } from "../../components/Input";
 import { SelectButton } from "../../components/SelectButton";
-import { CartContext } from "../../contexts/CartContext";
-import { AddressForm, CalcItem, CartItemsContainer, CheckoutContainer, Content, CurrencyDollarStyled, FormContainer, FormHeader, InputInLine, InputsWrapper, Payment, PaymentMethod, Text, TotalCalc } from "./styles";
+import { AddressForm, CartItemsContainer, CheckoutContainer, Content, CurrencyDollarStyled, FormContainer, FormHeader, InputInLine, InputsWrapper, Payment, PaymentMethod, Text } from "./styles";
 
 interface IFormData {
   cpf: number;
@@ -20,7 +18,6 @@ interface IFormData {
 
 export function Checkout() {
   const { register, handleSubmit } = useForm<IFormData>();
-  const { cart } = useContext(CartContext);
 
   const onSubmit = (data: IFormData) => {
     console.log({ data })
@@ -71,26 +68,10 @@ export function Checkout() {
       
       <CartItemsContainer>
         <h3>Cafés selecionados</h3>
+        
         <Content>
-          {cart.map(item => (
-            <CoffeeCartItem {...item} price={item.price_on_cents}/>
-          ))}
-        <TotalCalc>
-          <CalcItem>
-            <span>Total de itens</span>
-            <span>R$ 29,70</span>
-          </CalcItem>
-          <CalcItem>
-            <span>Entrega</span>
-            <span>R$ 3,50</span>
-          </CalcItem>
-          <CalcItem>
-            <h3>Total</h3>
-            <h3>R$ 33,20</h3>
-          </CalcItem>
-        </TotalCalc>
-
-        <Button mainColor="yellow" size="lg" variant="default" text="confirmar pedido" type="submit"/>
+          <CartSummary />
+          <Button mainColor="yellow" size="lg" variant="default" text="confirmar pedido" />
         </Content>
       </CartItemsContainer>
       </FormContainer>

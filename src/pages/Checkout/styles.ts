@@ -87,30 +87,6 @@ export const Content = styled.section`
   width: 100%;
 `
 
-export const TotalCalc = styled.div`
-  display: grid;
-  gap: .75rem;
-  padding-bottom: 1.5rem;
-`
-
-export const CalcItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  span {
-    font-size: 1rem;
-    color: ${props => props.theme['base-700']};
-  }
-
-  h3 {
-    font-family: 'Roboto';
-    font-weight: 700;
-    font-size: 1.25rem;
-
-    color: ${props => props.theme['base-800']};
-  }
-`
-
 export const CurrencyDollarStyled = styled(CurrencyDollar)`
   color: ${props => props.theme['secondary-400']} !important;
 `

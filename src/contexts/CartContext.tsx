@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useCallback, useReducer } from "react";
+import { ReactNode, useCallback, useReducer } from "react";
+import { createContext } from 'use-context-selector';
 import { addNewCartItemAction, CartItem, removeCartItemAction, updateCartItemQuantityAction } from "../reducers/cart/actions";
 import { cartReducer } from "../reducers/cart/reducer";
 
