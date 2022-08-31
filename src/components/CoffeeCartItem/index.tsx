@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useContextSelector } from 'use-context-selector';
+import { CartContext } from '../../contexts/CartContext';
 import { AmountButton } from "../AmountButton";
 import { Button } from "../Button";
 import { ButtonGroup, CoffeeCartItemContainer, CoffeeInfo, Content, Price } from "./styles";
@@ -13,6 +15,14 @@ interface CoffeeCartItemProps{
 export function CoffeeCartItem({ id, imageUrl, price, quantity, title }: CoffeeCartItemProps) {
   const [amount, setAmount] = useState(quantity);
 
+  const updateItemQuantity = useContextSelector(CartContext, (context) => {
+    return context.updateItemQuantity
+  })
+
+  useEffect(() => {
+    amount > 0 && amount !== quantity && updateItemQuantity(id, amount)
+  }, [amount])
+
   return (
     <CoffeeCartItemContainer>
       <Content>
@@ -21,7 +31,11 @@ export function CoffeeCartItem({ id, imageUrl, price, quantity, title }: CoffeeC
           <div>
             <h4>{title}</h4>
             <ButtonGroup>
-              <AmountButton amount={amount} setAmount={setAmount} size="sm" />
+              <AmountButton 
+                amount={quantity}
+                setAmount={setAmount}
+                size="sm"
+              />
               <Button mainColor="purple" variant="base" size="sm" icon={{ name: "Trash", weight: "regular" }} text="Remover" />
             </ButtonGroup>
           </div>

@@ -1,12 +1,14 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useContextSelector } from 'use-context-selector';
 import CoffeeLogo from '../../assets/coffee_logo.svg';
 import { CartContext } from '../../contexts/CartContext';
 import { Button } from "../Button";
 import { ButtonGroup, CartButtonContainer, CartItemQuantityIndicator, HeaderContainer } from "./styles";
 
 export function Header() {
-  const { cartItemsQuantity } = useContext(CartContext)
+  const cartItemsQuantity  = useContextSelector(CartContext, (context) => {
+    return context.cartItemsQuantity
+  })
 
   return (
     <HeaderContainer>

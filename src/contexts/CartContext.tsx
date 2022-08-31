@@ -21,16 +21,12 @@ export const CartContext = createContext({} as CartContextType);
 
 
 export function CartProvider({ children }: CartProviderProps) {
-  // TO DO: Implementar cart nos componentes (usar suas funções e variáveis...)
-  // TO DO: Ver como trabalhar com o JSON Server? tipo salvar o item todo ou buscar do JSON server e só salvar o id?
-  // TO DO: React Hook Form Implementation
   // TO DO: Contexto de dados da entrega, pagamento, tempo estimado?
   
   // Ver o por que de essa variável cart não estar tipada
   const [cart, dispatch] = useReducer(cartReducer, [])
   const cartItemsQuantity = cart.length
-
-  console.log({ cartItemsQuantity })
+  console.log(cart)
 
   const addNewCartItem = useCallback((newItem: CartItem) => {
     dispatch(

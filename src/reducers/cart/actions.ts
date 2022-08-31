@@ -36,7 +36,7 @@ export function removeCartItemAction(itemId: number) {
 
 export function updateCartItemQuantityAction(itemId: number, newQuantity: number) {
   return {
-    type: CartActionTypes.REMOVE_CART_ITEM,
+    type: CartActionTypes.UPDATE_CART_ITEM_QUANTITY,
     payload: {
       itemId,
       newQuantity

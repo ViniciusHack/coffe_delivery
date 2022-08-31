@@ -4,7 +4,6 @@ import { CartActionTypes } from "./actions";
 
 
 export function cartReducer(state: Cart, action: any) {
-  console.log({action})
   switch (action.type) {
     case CartActionTypes.ADD_NEW_CART_ITEM:
       return [...state, action.payload.newItem];

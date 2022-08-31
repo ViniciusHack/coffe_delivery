@@ -20,7 +20,7 @@ export function CartSummary() {
   return (
     <CartSummaryContainer>
       {cart.map(item => (
-        <CoffeeCartItem {...item} price={item.price_on_cents}/>
+        <CoffeeCartItem key={item.id} price={item.price_on_cents} {...item} />
       ))}
       <TotalCalc>
         <CalcItem>
