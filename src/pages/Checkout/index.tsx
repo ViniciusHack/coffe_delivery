@@ -1,9 +1,11 @@
 import { Bank, CreditCard, MapPinLine, Money } from "phosphor-react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../components/Button";
 import { CoffeeCartItem } from "../../components/CoffeeCartItem";
 import { Input } from "../../components/Input";
 import { SelectButton } from "../../components/SelectButton";
+import { CartContext } from "../../contexts/CartContext";
 import { AddressForm, CalcItem, CartItemsContainer, CheckoutContainer, Content, CurrencyDollarStyled, FormContainer, FormHeader, InputInLine, InputsWrapper, Payment, PaymentMethod, Text, TotalCalc } from "./styles";
 
 interface IFormData {
@@ -18,6 +20,7 @@ interface IFormData {
 
 export function Checkout() {
   const { register, handleSubmit } = useForm<IFormData>();
+  const { cart } = useContext(CartContext);
 
   const onSubmit = (data: IFormData) => {
     console.log({ data })
@@ -69,8 +72,9 @@ export function Checkout() {
       <CartItemsContainer>
         <h3>Cafés selecionados</h3>
         <Content>
-          <CoffeeCartItem />
-          <CoffeeCartItem />
+          {cart.map(item => (
+            <CoffeeCartItem {...item} price={item.price_on_cents}/>
+          ))}
         <TotalCalc>
           <CalcItem>
             <span>Total de itens</span>
