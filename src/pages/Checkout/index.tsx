@@ -7,6 +7,7 @@ import { Input } from "../../components/Input";
 import { RadioGroup } from "../../components/RadioGroup";
 import { CartContext } from "../../contexts/CartContext";
 import { AddressForm, CartItemsContainer, CheckoutContainer, Content, CurrencyDollarStyled, FormContainer, FormHeader, InputInLine, InputsWrapper, Payment, Text } from "./styles";
+// import {  } from '@hookform/resolvers/zod'
 
 interface IFormData {
   cpf: number;
@@ -20,7 +21,12 @@ interface IFormData {
 }
 
 export function Checkout() {
-  const { register, handleSubmit, control, watch } = useForm<IFormData>();
+  const { register, handleSubmit, control, watch } = useForm<IFormData>({
+    // resolver: zodResolver(schema)
+    defaultValues: {
+      paymentMethod: "credit"
+    }
+  });
   const cartItemsQuantity = useContextSelector(CartContext, (context) => {
     return context.cartItemsQuantity
   })
@@ -30,7 +36,6 @@ export function Checkout() {
   const onSubmit = (data: IFormData) => {
     console.log({ data })
   }
-
   return (
     <CheckoutContainer>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
@@ -69,26 +74,26 @@ export function Checkout() {
             <Controller 
               control={control} 
               name="paymentMethod"
-              render={({ field, fieldState }) => {
+              render={({ field }) => {
                 return (
                   <RadioGroup 
                     onSelectValue={field.onChange}
                     items={[
                       {
                         label: "Cartão de crédito",
-                        selected: field.value === paymentMethodWatcher, // to-do,
+                        selected: paymentMethodWatcher === "credit", // to-do,
                         value: "credit",
                         icon: <CreditCard />
                       },
                       {
                         label: "Cartão de débito",
-                        selected: field.value === paymentMethodWatcher, // to-do,
+                        selected: paymentMethodWatcher === "debit", // to-do,
                         value: "debit",
                         icon: <Bank />
                       },
                       {
                         label: "Dinheiro",
-                        selected: field.value === paymentMethodWatcher, // to-do,
+                        selected: paymentMethodWatcher === "cash", // to-do,
                         value: "cash",
                         icon: <Money />
                       },

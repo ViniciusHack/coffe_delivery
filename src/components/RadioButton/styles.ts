@@ -16,7 +16,7 @@ export const RadioButtonContainer = styled.button<RadioButtonContainerProps>`
   padding: 1rem;
   transition: background-color .1s;
 
-  border: 0;
+  border: 1px solid transparent;
 
   p {
     font-weight: 400;
@@ -37,6 +37,6 @@ export const RadioButtonContainer = styled.button<RadioButtonContainerProps>`
 
   ${props => props.selected && css`
     background-color: ${props => props.theme["secondary-100"]};
-    border: 1px solid ${props => props.theme["secondary-400"]}
+    border: 1px solid ${props => props.theme["secondary-400"]};
   `}
 `

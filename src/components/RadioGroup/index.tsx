@@ -1,4 +1,4 @@
-import { RadioButton, RadioOption } from "../SelectButton";
+import { RadioButton, RadioOption } from "../RadioButton";
 import { RadioGroupContainer } from "./styles";
 
 interface RadioGroupProps {
