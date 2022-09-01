@@ -15,14 +15,15 @@ interface CoffeeCartItemProps{
 export function CoffeeCartItem({ id, imageUrl, price, quantity, title }: CoffeeCartItemProps) {
   const [amount, setAmount] = useState(quantity);
 
-  const updateItemQuantity = useContextSelector(CartContext, (context) => {
-    return context.updateItemQuantity
+  const { updateItemQuantity, removeCartItem } = useContextSelector(CartContext, (context) => {
+    const { updateItemQuantity, removeCartItem } = context;
+    return { updateItemQuantity, removeCartItem }
   })
 
   useEffect(() => {
     amount > 0 && amount !== quantity && updateItemQuantity(id, amount)
   }, [amount])
-
+  
   return (
     <CoffeeCartItemContainer>
       <Content>
@@ -36,7 +37,14 @@ export function CoffeeCartItem({ id, imageUrl, price, quantity, title }: CoffeeC
                 setAmount={setAmount}
                 size="sm"
               />
-              <Button mainColor="purple" variant="base" size="sm" icon={{ name: "Trash", weight: "regular" }} text="Remover" />
+              <Button 
+                mainColor="purple"
+                variant="base"
+                size="sm"
+                icon={{ name: "Trash", weight: "regular" }}
+                text="Remover"
+                onClick={() => removeCartItem(id)}
+              />
             </ButtonGroup>
           </div>
         </CoffeeInfo>

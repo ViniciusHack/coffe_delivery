@@ -120,12 +120,16 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     color: ${props => props.theme[buttonVariants[props.variant][props.mainColor].icon]};
   }
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: ${props => props.theme[buttonVariants[props.variant][props.mainColor].hover.bg]};
     color: ${props => props.theme[buttonVariants[props.variant][props.mainColor].hover.text]};
 
     svg {
       color: ${props => props.theme[buttonVariants[props.variant][props.mainColor].hover.icon]};
     }
+  }
+
+  &:disabled {
+    opacity: 0.6;
   }
 `;

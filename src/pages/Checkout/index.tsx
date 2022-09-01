@@ -1,9 +1,11 @@
 import { Bank, CreditCard, MapPinLine, Money } from "phosphor-react";
 import { useForm } from "react-hook-form";
+import { useContextSelector } from "use-context-selector";
 import { Button } from "../../components/Button";
 import { CartSummary } from "../../components/CartSummary";
 import { Input } from "../../components/Input";
 import { SelectButton } from "../../components/SelectButton";
+import { CartContext } from "../../contexts/CartContext";
 import { AddressForm, CartItemsContainer, CheckoutContainer, Content, CurrencyDollarStyled, FormContainer, FormHeader, InputInLine, InputsWrapper, Payment, PaymentMethod, Text } from "./styles";
 
 interface IFormData {
@@ -18,6 +20,9 @@ interface IFormData {
 
 export function Checkout() {
   const { register, handleSubmit } = useForm<IFormData>();
+  const cartItemsQuantity = useContextSelector(CartContext, (context) => {
+    return context.cartItemsQuantity
+  })
 
   const onSubmit = (data: IFormData) => {
     console.log({ data })
@@ -71,7 +76,7 @@ export function Checkout() {
         
         <Content>
           <CartSummary />
-          <Button mainColor="yellow" size="lg" variant="default" text="confirmar pedido" />
+          <Button disabled={cartItemsQuantity === 0} mainColor="yellow" size="lg" type="submit" variant="default" text="confirmar pedido" />
         </Content>
       </CartItemsContainer>
       </FormContainer>

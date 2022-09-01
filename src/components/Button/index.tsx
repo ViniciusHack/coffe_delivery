@@ -1,9 +1,9 @@
 import * as phosphor from 'phosphor-react';
-import { HTMLAttributes } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import { AvailableIcons } from "../../@types/AvailableIcons";
 import { ButtonStyle } from "./styles";
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
   icon?: {
     name: AvailableIcons;
@@ -24,7 +24,7 @@ export function Button({ text, variant, icon, size, mainColor, ...rest }: Button
   const DynamicIcon = icon ? phosphor[icon.name] : null
 
   return (
-    <ButtonStyle variant={variant} size={size} mainColor={mainColor} {...rest}>
+    <ButtonStyle variant={variant} size={size} mainColor={mainColor} {...rest} type={rest.type || "button"}>
       {DynamicIcon && <DynamicIcon weight={icon!.weight} size={iconSize[size]}/>}
       {text}
     </ButtonStyle>
