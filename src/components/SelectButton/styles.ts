@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
 
-interface SelectButtonContainerProps {
+interface RadioButtonContainerProps {
   selected: boolean;
 }
 
-export const SelectButtonContainer = styled.button<SelectButtonContainerProps>`
+export const RadioButtonContainer = styled.button<RadioButtonContainerProps>`
   text-transform: uppercase;
 
   background-color: ${props => props.theme["base-400"]};

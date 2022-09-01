@@ -68,13 +68,6 @@ export const Payment = styled.div`
   padding: 2.5rem;
 `
 
-export const PaymentMethod = styled.div`
-  display: grid;
-  gap: .75rem;
-
-  grid-template-columns: repeat(3, 1fr);
-`
-
 export const CartItemsContainer = styled.div`
   width: 100%;
 `

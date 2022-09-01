@@ -1,12 +1,12 @@
 import { Bank, CreditCard, MapPinLine, Money } from "phosphor-react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useContextSelector } from "use-context-selector";
 import { Button } from "../../components/Button";
 import { CartSummary } from "../../components/CartSummary";
 import { Input } from "../../components/Input";
-import { SelectButton } from "../../components/SelectButton";
+import { RadioGroup } from "../../components/RadioGroup";
 import { CartContext } from "../../contexts/CartContext";
-import { AddressForm, CartItemsContainer, CheckoutContainer, Content, CurrencyDollarStyled, FormContainer, FormHeader, InputInLine, InputsWrapper, Payment, PaymentMethod, Text } from "./styles";
+import { AddressForm, CartItemsContainer, CheckoutContainer, Content, CurrencyDollarStyled, FormContainer, FormHeader, InputInLine, InputsWrapper, Payment, Text } from "./styles";
 
 interface IFormData {
   cpf: number;
@@ -16,13 +16,16 @@ interface IFormData {
   neighborhood: string;
   city: string;
   uf: string;
+  paymentMethod: "credit" | "debit" | "cash";
 }
 
 export function Checkout() {
-  const { register, handleSubmit } = useForm<IFormData>();
+  const { register, handleSubmit, control, watch } = useForm<IFormData>();
   const cartItemsQuantity = useContextSelector(CartContext, (context) => {
     return context.cartItemsQuantity
   })
+
+  const paymentMethodWatcher = watch("paymentMethod")
 
   const onSubmit = (data: IFormData) => {
     console.log({ data })
@@ -63,11 +66,38 @@ export function Checkout() {
                 <p>O pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
               </Text>
             </FormHeader>
-            <PaymentMethod>
-              <SelectButton selected={true} icon={<CreditCard />} text="Cartão de crédito"/>
-              <SelectButton selected={false} icon={<Bank />} text="Cartão de débito"/>
-              <SelectButton selected={false} icon={<Money />} text="Dinheiro"/>
-            </PaymentMethod>
+            <Controller 
+              control={control} 
+              name="paymentMethod"
+              render={({ field, fieldState }) => {
+                return (
+                  <RadioGroup 
+                    onSelectValue={field.onChange}
+                    items={[
+                      {
+                        label: "Cartão de crédito",
+                        selected: field.value === paymentMethodWatcher, // to-do,
+                        value: "credit",
+                        icon: <CreditCard />
+                      },
+                      {
+                        label: "Cartão de débito",
+                        selected: field.value === paymentMethodWatcher, // to-do,
+                        value: "debit",
+                        icon: <Bank />
+                      },
+                      {
+                        label: "Dinheiro",
+                        selected: field.value === paymentMethodWatcher, // to-do,
+                        value: "cash",
+                        icon: <Money />
+                      },
+                    ]}
+                  />
+                )
+              }}
+            />
+            
           </Payment>
         </div>
       

@@ -1,17 +1,26 @@
-import { ReactElement } from "react";
-import { SelectButtonContainer } from "./styles";
+import { ButtonHTMLAttributes, ReactElement } from "react";
+import { RadioButtonContainer } from "./styles";
 
-interface SelectButtonInterface {
-  text: string;
-  icon: ReactElement;
+export interface RadioOption {
+  label: string;
+  value: string;
   selected: boolean;
+  icon?: ReactElement;
 }
 
-export function SelectButton({ icon, text, selected }: SelectButtonInterface) {
+interface RadioButtonInterface extends ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string;
+  value: string;
+  selected: boolean;
+  icon?: ReactElement;
+  onSelectValue: (value: string) => void;
+}
+
+export function RadioButton({ icon, label, value, selected, onSelectValue }: RadioButtonInterface) {
   return (
-    <SelectButtonContainer selected={selected} type="button">
+    <RadioButtonContainer onClick={() => onSelectValue(value)} selected={selected} type="button">
       {icon}
-      <p>{text}</p>
-    </SelectButtonContainer>
+      <p>{label}</p>
+    </RadioButtonContainer>
   )
 }
