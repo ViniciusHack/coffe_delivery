@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useContextSelector } from 'use-context-selector';
 import { CartContext } from "../../../contexts/CartContext";
 import { AmountButton } from "../../AmountButton";
@@ -15,10 +15,38 @@ interface CoffeeItemProps {
 }
 
 export function CoffeeItem({ id, badges, description, imageUrl, price, title }: CoffeeItemProps) {
-  const addNewCartItem = useContextSelector(CartContext, (context) => {
-    return context.addNewCartItem
-  });
   const [quantity, setQuantity] = useState(0);
+  const { addNewCartItem, updateItemQuantity, findItem } = useContextSelector(CartContext, (context) => {
+    const { addNewCartItem, updateItemQuantity, findItem } = context;
+    return { updateItemQuantity, addNewCartItem, findItem };
+  });
+
+  const onIncrease = useCallback(() => {
+    setQuantity(state => state + 1)
+  }, [])
+
+  const onDecrease = useCallback(() => {
+    if(quantity > 0) {
+      setQuantity(state => {
+        return state - 1
+      })
+    }
+  }, [quantity])
+
+  const handleClickCoffeeItem = () => {
+    const cartItem = findItem(id);
+    if(!!cartItem) {
+      updateItemQuantity(id, quantity)
+    } else {
+      addNewCartItem({
+        id,
+        title,
+        imageUrl,
+        price_on_cents: price,
+        quantity,
+      })
+    }
+  };
 
   return (
     <CoffeeItemContainer>
@@ -26,7 +54,7 @@ export function CoffeeItem({ id, badges, description, imageUrl, price, title }: 
         <img src={imageUrl} />
       </ImageBox>
       {badges.map(badge => (
-        <Badge>
+        <Badge key={badge}>
           {badge}
         </Badge>
       ))}
@@ -35,17 +63,16 @@ export function CoffeeItem({ id, badges, description, imageUrl, price, title }: 
       <Footer>
         <span>R${" "}<strong>{Intl.NumberFormat('pt-br').format(price / 100).padEnd(4, "0")}</strong></span>
         <Actions>
-          <AmountButton amount={quantity} setAmount={setQuantity} size="md" />
+          <AmountButton
+            onDecrease={onDecrease}
+            onIncrease={onIncrease}
+            amount={quantity}
+            size="md"
+          />
           <Button
             mainColor="purple"
             size="md"
-            onClick={() => addNewCartItem({
-              id,
-              title,
-              imageUrl,
-              price_on_cents: price,
-              quantity,
-            })}
+            onClick={handleClickCoffeeItem}
             variant="default"
             icon={{
             name: "ShoppingCart",

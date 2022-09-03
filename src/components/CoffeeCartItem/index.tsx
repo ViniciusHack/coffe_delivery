@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { useContextSelector } from 'use-context-selector';
 import { CartContext } from '../../contexts/CartContext';
 import { AmountButton } from "../AmountButton";
@@ -13,16 +13,20 @@ interface CoffeeCartItemProps{
   quantity: number;
 }
 export function CoffeeCartItem({ id, imageUrl, price, quantity, title }: CoffeeCartItemProps) {
-  const [amount, setAmount] = useState(quantity);
-
   const { updateItemQuantity, removeCartItem } = useContextSelector(CartContext, (context) => {
     const { updateItemQuantity, removeCartItem } = context;
     return { updateItemQuantity, removeCartItem }
   })
 
-  useEffect(() => {
-    amount > 0 && amount !== quantity && updateItemQuantity(id, amount)
-  }, [amount])
+  const onIncrease = useCallback(() => {
+    updateItemQuantity(id, quantity + 1)
+  }, [quantity, id])
+
+  const onDecrease = useCallback(() => {
+    if(quantity > 1) {
+      updateItemQuantity(id, quantity - 1)
+    }
+  }, [quantity, id])
   
   return (
     <CoffeeCartItemContainer>
@@ -34,7 +38,8 @@ export function CoffeeCartItem({ id, imageUrl, price, quantity, title }: CoffeeC
             <ButtonGroup>
               <AmountButton 
                 amount={quantity}
-                setAmount={setAmount}
+                onIncrease={onIncrease}
+                onDecrease={onDecrease}
                 size="sm"
               />
               <Button 

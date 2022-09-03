@@ -3,7 +3,7 @@ import { CartActionTypes } from "./actions";
 
 
 
-export function cartReducer(state: Cart, action: any) {
+export function cartReducer(state: Cart, action: any):Cart {
   switch (action.type) {
     case CartActionTypes.ADD_NEW_CART_ITEM:
       return [...state, action.payload.newItem];
@@ -18,6 +18,9 @@ export function cartReducer(state: Cart, action: any) {
         }
         return cartItem
       })
+
+    case CartActionTypes.SET_CART:
+      return action.payload.cart;
     default:
       return state;
   }
