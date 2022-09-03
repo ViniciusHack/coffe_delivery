@@ -24,18 +24,15 @@ interface IFormData {
 const required_error = "This field is required";
 
 const schema = zod.object({
-  cpf: zod.number({
-    invalid_type_error: "Must be a number",
-    required_error
-  }).positive("Must be positive").min(11, "Must have 11 digits").max(11, "Must have 11 digits"),
+  cpf: zod.string().regex(/([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/, { message: "Invalid format"}).length(11, { message: "Invalid format" }),
   street: zod.string({ required_error }),
   number: zod.number({
     invalid_type_error: "Must be a number",
     required_error
   }),
   complement: zod.string().optional(),
-  neighborhood: zod.string({ required_error }),
-  city: zod.string({ required_error }),
+  neighborhood: zod.string().min(1, { message: required_error }),
+  city: zod.string().min(1, { message: required_error }),
   uf: zod.string({ required_error }).length(2, {
     message: "Must have 2 characters"
   }),
@@ -72,9 +69,7 @@ export function Checkout() {
               </Text>
             </FormHeader>
             <InputsWrapper>
-              <Input placeholder="CPF" width="12.5rem" register={register("cpf", {
-                valueAsNumber: true
-              })}/>
+              <Input placeholder="CPF" width="12.5rem" type="number" register={register("cpf")}/>
               {formState.errors?.cpf && <span>{formState.errors?.cpf.message}</span>}
               <Input placeholder="Rua" width="35rem" register={register("street")}/>
               {formState.errors?.street && <span>{formState.errors?.street.message}</span>}

@@ -46,6 +46,10 @@ export const InputsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  > span {
+    color: ${props => props.theme['secondary-400']};
+  }
 `
 
 export const InputInLine = styled.div`
@@ -55,6 +59,11 @@ export const InputInLine = styled.div`
   div {
     flex: 1;
   }
+
+  > span {
+    color: ${props => props.theme['secondary-400']};
+    align-self: center;
+  } 
 `
 
 export const Text = styled.div`
