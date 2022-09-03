@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Bank, CreditCard, MapPinLine, Money } from "phosphor-react";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 import { useContextSelector } from "use-context-selector";
 import * as zod from 'zod';
 import { Button } from "../../components/Button";
@@ -8,24 +9,14 @@ import { CartSummary } from "../../components/CartSummary";
 import { Input } from "../../components/Input";
 import { RadioGroup } from "../../components/RadioGroup";
 import { CartContext } from "../../contexts/CartContext";
+import { DeliveryContext } from '../../contexts/DeliveryContext';
 import { AddressForm, CartItemsContainer, CheckoutContainer, Content, CurrencyDollarStyled, FormContainer, FormHeader, InputInLine, InputsWrapper, Payment, Text } from "./styles";
-
-interface IFormData {
-  cpf: number;
-  street: string;
-  number: number;
-  complement: string;
-  neighborhood: string;
-  city: string;
-  uf: string;
-  paymentMethod: "credit" | "debit" | "cash";
-}
 
 const required_error = "This field is required";
 
 const schema = zod.object({
   cpf: zod.string().regex(/([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/, { message: "Invalid format"}).length(11, { message: "Invalid format" }),
-  street: zod.string({ required_error }),
+  street: zod.string().min(1, { message: required_error }),
   number: zod.number({
     invalid_type_error: "Must be a number",
     required_error
@@ -39,6 +30,8 @@ const schema = zod.object({
   paymentMethod: zod.enum(["credit", "debit", "cash"])
 })
 
+type IFormData = zod.infer<typeof schema>;
+
 export function Checkout() {
   const { register, handleSubmit, control, watch, formState} = useForm<IFormData>({
     resolver: zodResolver(schema),
@@ -46,15 +39,35 @@ export function Checkout() {
       paymentMethod: "credit"
     }
   });
-  const cartItemsQuantity = useContextSelector(CartContext, (context) => {
-    return context.cartItemsQuantity
+  const { resetCart, cartItemsQuantity } = useContextSelector(CartContext, (context) => {
+    const { resetCart, cartItemsQuantity } = context;
+    return { resetCart, cartItemsQuantity }
   })
+  const changeFormData = useContextSelector(DeliveryContext, (context) => {
+    return context.changeFormData;
+  })
+  const navigate = useNavigate();
 
   const paymentMethodWatcher = watch("paymentMethod")
 
   const onSubmit = (data: IFormData) => {
-    console.log({ data })
+    const { city, neighborhood, number, street, uf, paymentMethod } = data;
+    const formData = {
+      address: {
+        number,
+        street,
+        neighborhood,
+        city,
+        uf
+      },
+      paymentMethod
+    } as const
+
+    changeFormData(formData);
+    resetCart();
+    navigate("/success")
   }
+  
   return (
     <CheckoutContainer>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
@@ -71,23 +84,30 @@ export function Checkout() {
             <InputsWrapper>
               <Input placeholder="CPF" width="12.5rem" type="number" register={register("cpf")}/>
               {formState.errors?.cpf && <span>{formState.errors?.cpf.message}</span>}
+
               <Input placeholder="Rua" width="35rem" register={register("street")}/>
               {formState.errors?.street && <span>{formState.errors?.street.message}</span>}
+
               <InputInLine>
-                <Input placeholder="Número" width="12.5rem" register={register("number", {
+                <Input placeholder="Número" width="12.5rem" type="number" register={register("number", {
                   valueAsNumber: true
                 })}/>
                 {formState.errors?.number && <span>{formState.errors?.number.message}</span>}
+
                 <Input placeholder="Complemento" optional register={register("complement")}/>
                 {formState.errors?.complement && <span>{formState.errors?.complement.message}</span>}
+                
               </InputInLine>
               <InputInLine>
                 <Input placeholder="Bairro" width="12.5rem" register={register("neighborhood")}/>
                 {formState.errors?.neighborhood && <span>{formState.errors?.neighborhood.message}</span>}
+
                 <Input placeholder="Cidade" register={register("city")}/>
                 {formState.errors?.city && <span>{formState.errors?.city.message}</span>}
+
                 <Input placeholder="UF" width="5rem" register={register("uf")}/>
                 {formState.errors?.uf && <span>{formState.errors?.uf.message}</span>}
+
               </InputInLine>
             </InputsWrapper>
           </AddressForm>

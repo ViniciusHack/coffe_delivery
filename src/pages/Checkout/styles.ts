@@ -48,6 +48,8 @@ export const InputsWrapper = styled.div`
   gap: 1rem;
 
   > span {
+    font-size: .875rem;
+    margin-top: -0.75rem;
     color: ${props => props.theme['secondary-400']};
   }
 `
@@ -61,6 +63,7 @@ export const InputInLine = styled.div`
   }
 
   > span {
+    font-size: .875rem;
     color: ${props => props.theme['secondary-400']};
     align-self: center;
   } 

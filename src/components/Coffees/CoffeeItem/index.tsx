@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { useContextSelector } from 'use-context-selector';
 import { CartContext } from "../../../contexts/CartContext";
 import { AmountButton } from "../../AmountButton";
@@ -14,11 +14,11 @@ interface CoffeeItemProps {
   price: number;
 }
 
-export function CoffeeItem({ id, badges, description, imageUrl, price, title }: CoffeeItemProps) {
+function CoffeeItemComponent({ id, badges, description, imageUrl, price, title }: CoffeeItemProps) {
   const [quantity, setQuantity] = useState(0);
-  const { addNewCartItem, updateItemQuantity, findItem } = useContextSelector(CartContext, (context) => {
-    const { addNewCartItem, updateItemQuantity, findItem } = context;
-    return { updateItemQuantity, addNewCartItem, findItem };
+  const { addNewCartItem, updateItemQuantity, cart } = useContextSelector(CartContext, (context) => {
+    const { addNewCartItem, updateItemQuantity, cart } = context;
+    return { updateItemQuantity, addNewCartItem, cart };
   });
 
   const onIncrease = useCallback(() => {
@@ -34,7 +34,7 @@ export function CoffeeItem({ id, badges, description, imageUrl, price, title }: 
   }, [quantity])
 
   const handleClickCoffeeItem = () => {
-    const cartItem = findItem(id);
+    const cartItem = cart.find(item => item.id === id);
     if(!!cartItem) {
       updateItemQuantity(id, quantity)
     } else {
@@ -84,3 +84,5 @@ export function CoffeeItem({ id, badges, description, imageUrl, price, title }: 
     </CoffeeItemContainer>
   )
 }
+
+export const CoffeeItem = memo(CoffeeItemComponent);

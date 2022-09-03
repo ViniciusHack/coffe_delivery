@@ -13,7 +13,7 @@ interface CartContextType {
   addNewCartItem: (newItem: CartItem) => void;
   removeCartItem: (itemId: number) => void;
   updateItemQuantity: (itemId: number, newQuantity: number) => void;
-  findItem: (itemId: number) => CartItem | undefined;
+  resetCart: () => void;
 }
 
 export type Cart = CartItem[]
@@ -45,9 +45,14 @@ export function CartProvider({ children }: CartProviderProps) {
     )
   }, [])
 
-  const findItem = useCallback((id: number) => {
-    return cart.find(item => item.id === id);
-  }, [cart])
+  const resetCart = useCallback(() => {
+    dispatch({
+      type: "SET_CART",
+      payload: {
+        cart: []
+      }
+    })
+  }, [])
 
   useEffect(() => {
     cartItemsQuantity > 0 && localStorage.setItem("@coffee-express-cart", JSON.stringify(cart));
@@ -67,7 +72,7 @@ export function CartProvider({ children }: CartProviderProps) {
   }, [])
 
   return (
-    <CartContext.Provider value={{ cart, findItem, cartItemsQuantity, addNewCartItem, removeCartItem, updateItemQuantity }}>
+    <CartContext.Provider value={{ cart, resetCart, cartItemsQuantity, addNewCartItem, removeCartItem, updateItemQuantity }}>
       {children}
     </CartContext.Provider>
   )
