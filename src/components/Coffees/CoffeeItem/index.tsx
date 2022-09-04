@@ -1,6 +1,7 @@
-import { memo, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useContextSelector } from 'use-context-selector';
 import { CartContext } from "../../../contexts/CartContext";
+import { useFindCartItem } from "../../../hooks/useFindCartItem";
 import { AmountButton } from "../../AmountButton";
 import { Button } from "../../Button";
 import { Actions, Badge, CoffeeItemContainer, Footer, ImageBox } from "./styles";
@@ -14,12 +15,13 @@ interface CoffeeItemProps {
   price: number;
 }
 
-function CoffeeItemComponent({ id, badges, description, imageUrl, price, title }: CoffeeItemProps) {
+export function CoffeeItem({ id, badges, description, imageUrl, price, title }: CoffeeItemProps) {
   const [quantity, setQuantity] = useState(0);
-  const { addNewCartItem, updateItemQuantity, cart } = useContextSelector(CartContext, (context) => {
-    const { addNewCartItem, updateItemQuantity, cart } = context;
-    return { updateItemQuantity, addNewCartItem, cart };
-  });
+  const { addNewCartItem, updateItemQuantity } = useContextSelector(CartContext, (context) => {
+    const { addNewCartItem, updateItemQuantity } = context;
+    return { updateItemQuantity, addNewCartItem };
+  }); 
+  const { findCartItem } = useFindCartItem();
 
   const onIncrease = useCallback(() => {
     setQuantity(state => state + 1)
@@ -34,8 +36,8 @@ function CoffeeItemComponent({ id, badges, description, imageUrl, price, title }
   }, [quantity])
 
   const handleClickCoffeeItem = () => {
-    const cartItem = cart.find(item => item.id === id);
-    if(!!cartItem) {
+    const { itemAlreadyExists } = findCartItem(id)
+    if(itemAlreadyExists) {
       updateItemQuantity(id, quantity)
     } else {
       addNewCartItem({
@@ -84,5 +86,3 @@ function CoffeeItemComponent({ id, badges, description, imageUrl, price, title }
     </CoffeeItemContainer>
   )
 }
-
-export const CoffeeItem = memo(CoffeeItemComponent);
