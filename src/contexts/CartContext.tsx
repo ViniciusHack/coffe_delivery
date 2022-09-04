@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useReducer } from "react";
+import { ReactNode, useCallback, useEffect, useReducer } from "react";
 import { createContext } from 'use-context-selector';
 import { addNewCartItemAction, CartItem, removeCartItemAction, updateCartItemQuantityAction } from "../reducers/cart/actions";
 import { cartReducer } from "../reducers/cart/reducer";
@@ -22,9 +22,16 @@ export const CartContext = createContext({} as CartContextType);
 
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [cart, dispatch] = useReducer(cartReducer, [])
+  const [cart, dispatch] = useReducer(cartReducer, [], () => {
+    const storedCartJSON = localStorage.getItem("@coffee-delivery:cart-state-1.0.0");
+
+    if(storedCartJSON) {
+      return JSON.parse(storedCartJSON);
+    }
+    return []
+  })
   const cartItemsQuantity = cart.length
-  // const [cartStored, setCartStored] = useLocalStorage<Cart>('@coffee-delivery-cart', []); Only for training
+  // const [cartStored, setCartStored] = useLocalStorage<Cart>('@coffee-delivery:cart-state-1.0.0', []); Only for training
 
   const addNewCartItem = useCallback((newItem: CartItem) => {
     dispatch(
@@ -52,6 +59,11 @@ export function CartProvider({ children }: CartProviderProps) {
       }
     })
   }, [])
+
+  useEffect(() => {
+    const cartJSON = JSON.stringify(cart);
+    localStorage.setItem("@coffee-delivery:cart-state-1.0.0", cartJSON);
+  }, [cart])
 
   return (
     <CartContext.Provider value={{ cart, resetCart, cartItemsQuantity, addNewCartItem, removeCartItem, updateItemQuantity }}>
