@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect, useReducer } from "react";
+import { ReactNode, useCallback, useReducer } from "react";
 import { createContext } from 'use-context-selector';
 import { addNewCartItemAction, CartItem, removeCartItemAction, updateCartItemQuantityAction } from "../reducers/cart/actions";
 import { cartReducer } from "../reducers/cart/reducer";
@@ -22,10 +22,9 @@ export const CartContext = createContext({} as CartContextType);
 
 
 export function CartProvider({ children }: CartProviderProps) {
-  // TO DO: Contexto de dados da entrega, pagamento, tempo estimado?
-  
   const [cart, dispatch] = useReducer(cartReducer, [])
   const cartItemsQuantity = cart.length
+  // const [cartStored, setCartStored] = useLocalStorage<Cart>('@coffee-delivery-cart', []); Only for training
 
   const addNewCartItem = useCallback((newItem: CartItem) => {
     dispatch(
@@ -51,23 +50,6 @@ export function CartProvider({ children }: CartProviderProps) {
       payload: {
         cart: []
       }
-    })
-  }, [])
-
-  useEffect(() => {
-    cartItemsQuantity > 0 && localStorage.setItem("@coffee-express-cart", JSON.stringify(cart));
-  }, [cart])
-
-  useEffect(() => {
-    const previousSessionCartString = localStorage.getItem("@coffee-express-cart");
-    if(!previousSessionCartString) return;
-    
-    const previousSessionCart:Cart = JSON.parse(previousSessionCartString)
-    if(previousSessionCart.length === 0) return;
-
-    dispatch({
-      type: "SET_CART",
-      payload: { cart: previousSessionCart }
     })
   }, [])
 
