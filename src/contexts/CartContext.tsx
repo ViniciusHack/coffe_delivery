@@ -38,6 +38,7 @@ export function CartProvider({ children }: CartProviderProps) {
       addNewCartItemAction(newItem)
     )
   }, [])
+  
 
   const removeCartItem = useCallback((itemId: number) => {
     dispatch(

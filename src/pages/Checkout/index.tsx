@@ -15,7 +15,7 @@ import { AddressForm, CartItemsContainer, CheckoutContainer, Content, CurrencyDo
 const required_error = "This field is required";
 
 const schema = zod.object({
-  cpf: zod.string().regex(/([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/, { message: "Invalid format"}).length(11, { message: "Invalid format" }),
+  cep: zod.string().regex(/[0-9]{5}[0-9]{3}/, { message: "Invalid format"}).length(8, { message: "Invalid format"}),
   street: zod.string().min(1, { message: required_error }),
   number: zod.number({
     invalid_type_error: "Must be a number",
@@ -82,8 +82,8 @@ export function Checkout() {
               </Text>
             </FormHeader>
             <InputsWrapper>
-              <Input placeholder="CPF" width="12.5rem" type="number" register={register("cpf")}/>
-              {formState.errors?.cpf && <span>{formState.errors?.cpf.message}</span>}
+              <Input placeholder="CEP" width="12.5rem" type="number" register={register("cep")}/>
+              {formState.errors?.cep && <span>{formState.errors?.cep.message}</span>}
 
               <Input placeholder="Rua" width="35rem" register={register("street")}/>
               {formState.errors?.street && <span>{formState.errors?.street.message}</span>}
