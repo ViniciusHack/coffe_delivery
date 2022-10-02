@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const CoffeeCartItemContainer = styled.div`
   hr {
     width: 100%;
     height: 0;
     border: 0;
-    border-bottom: 1px solid ${props => props.theme["base-400"]};
+    border-bottom: 1px solid ${(props) => props.theme['base-400']};
     margin: 1.5rem 0;
   }
 `
@@ -29,19 +29,19 @@ export const CoffeeInfo = styled.div`
     font-weight: 400;
     font-size: 1rem;
 
-    color: ${props => props.theme["base-800"]};
+    color: ${(props) => props.theme['base-800']};
   }
 `
 
 export const ButtonGroup = styled.div`
   display: flex;
-  gap: .5rem;
-  padding-top: .5rem;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
 `
 
 export const Price = styled.p`
   font-weight: 700;
   font-size: 1rem;
 
-  color: ${props => props.theme["base-700"]};
+  color: ${(props) => props.theme['base-700']};
 `

@@ -1,45 +1,50 @@
-import { ReactNode, useCallback, useState } from "react";
-import { createContext } from "use-context-selector";
-
-interface DeliveryContextType {
-  address: {
-    street: string;
-    number: number;
-    neighborhood: string;
-    uf: string;
-    city: string;
-  }
-  paymentMethod: "credit" | "debit" | "cash",
-  changeFormData: (form: FormType) => void;
-}
+import { ReactNode, useCallback, useState } from 'react'
+import { createContext } from 'use-context-selector'
 
 interface FormType {
   address: {
-    street: string;
-    number: number;
-    neighborhood: string;
-    uf: string;
-    city: string;
+    street: string
+    number: number
+    neighborhood: string
+    uf: string
+    city: string
   }
-  paymentMethod: "credit" | "debit" | "cash",
+  paymentMethod: 'credit' | 'debit' | 'cash'
+}
+
+interface DeliveryContextType {
+  address: {
+    street: string
+    number: number
+    neighborhood: string
+    uf: string
+    city: string
+  }
+  paymentMethod: 'credit' | 'debit' | 'cash'
+  changeFormData: (form: FormType) => void
 }
 
 interface DeliveryProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
-export const DeliveryContext = createContext({} as DeliveryContextType);
-
+export const DeliveryContext = createContext({} as DeliveryContextType)
 
 export function DeliveryProvider({ children }: DeliveryProviderProps) {
-  const [formData, setFormData] = useState({} as FormType);
+  const [formData, setFormData] = useState({} as FormType)
 
   const changeFormData = useCallback((form: FormType) => {
-    setFormData(form);
+    setFormData(form)
   }, [])
 
-  return(
-    <DeliveryContext.Provider value={{ address: formData.address, paymentMethod: formData.paymentMethod, changeFormData }}>
+  return (
+    <DeliveryContext.Provider
+      value={{
+        address: formData.address,
+        paymentMethod: formData.paymentMethod,
+        changeFormData,
+      }}
+    >
       {children}
     </DeliveryContext.Provider>
   )

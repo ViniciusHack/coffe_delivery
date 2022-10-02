@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const CoffeesContainer = styled.section`
   padding-top: 2rem;
@@ -6,7 +6,7 @@ export const CoffeesContainer = styled.section`
   h2 {
     font-size: 2rem;
   }
-`;
+`
 
 export const CoffeeList = styled.div`
   display: flex;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const HeroContainer = styled.section`
   display: flex;
@@ -24,19 +24,16 @@ export const LeftContent = styled.div`
 
   > h1 {
     font-size: 3rem;
-    color: ${props => props.theme['base-900']};
+    color: ${(props) => props.theme['base-900']};
   }
 
   > p {
     font-size: 1.25rem;
     padding-top: 1rem;
   }
-
 `
 
-export const RightContent = styled.div`
-
-`
+export const RightContent = styled.div``
 
 export const Features = styled.div`
   display: flex;

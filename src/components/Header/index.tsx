@@ -1,12 +1,17 @@
-import { Link } from 'react-router-dom';
-import { useContextSelector } from 'use-context-selector';
-import CoffeeLogo from '../../assets/coffee_logo.svg';
-import { CartContext } from '../../contexts/CartContext';
-import { Button } from "../Button";
-import { ButtonGroup, CartButtonContainer, CartItemQuantityIndicator, HeaderContainer } from "./styles";
+import { Link } from 'react-router-dom'
+import { useContextSelector } from 'use-context-selector'
+import CoffeeLogo from '../../assets/coffee_logo.svg'
+import { CartContext } from '../../contexts/CartContext'
+import { Button } from '../Button'
+import {
+  ButtonGroup,
+  CartButtonContainer,
+  CartItemQuantityIndicator,
+  HeaderContainer,
+} from './styles'
 
 export function Header() {
-  const cartItemsQuantity  = useContextSelector(CartContext, (context) => {
+  const cartItemsQuantity = useContextSelector(CartContext, (context) => {
     return context.cartItemsQuantity
   })
 
@@ -23,13 +28,13 @@ export function Header() {
           icon={{ name: 'MapPin', weight: 'fill' }}
           mainColor="purple"
         />
-        
+
         <Link to="/checkout">
           <CartButtonContainer>
             <Button
               size="md"
               variant="outline"
-              icon={{ name: 'ShoppingCart', weight: 'fill'}}
+              icon={{ name: 'ShoppingCart', weight: 'fill' }}
               mainColor="yellow"
             />
             <CartItemQuantityIndicator>

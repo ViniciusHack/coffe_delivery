@@ -1,12 +1,10 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
-export const CartSummaryContainer = styled.div`
-
-`
+export const CartSummaryContainer = styled.div``
 
 export const TotalCalc = styled.div`
   display: grid;
-  gap: .75rem;
+  gap: 0.75rem;
   padding-bottom: 1.5rem;
 `
 
@@ -16,7 +14,7 @@ export const CalcItem = styled.div`
 
   span {
     font-size: 1rem;
-    color: ${props => props.theme['base-700']};
+    color: ${(props) => props.theme['base-700']};
   }
 
   h3 {
@@ -24,6 +22,6 @@ export const CalcItem = styled.div`
     font-weight: 700;
     font-size: 1.25rem;
 
-    color: ${props => props.theme['base-800']};
+    color: ${(props) => props.theme['base-800']};
   }
 `

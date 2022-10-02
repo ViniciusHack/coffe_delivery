@@ -16,5 +16,5 @@ export const defaultTheme = {
   'base-300': '#EDEDED',
   'base-200': '#F3F2F2',
   'base-100': '#FAFAFA',
-  'base-0': '#FFFFFF'
+  'base-0': '#FFFFFF',
 }

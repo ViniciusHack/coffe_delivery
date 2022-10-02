@@ -1,16 +1,17 @@
+/* eslint-disable no-unused-vars */
 export interface CartItem {
-  id: number;
-  title: string;
-  quantity: number;
-  imageUrl: string;
-  price_on_cents: number;
+  id: number
+  title: string
+  quantity: number
+  imageUrl: string
+  price_on_cents: number
 }
 
 export enum CartActionTypes {
   ADD_NEW_CART_ITEM = 'ADD_NEW_CART_ITEM',
   REMOVE_CART_ITEM = 'REMOVE_CART_ITEM',
   UPDATE_CART_ITEM_QUANTITY = 'UPDATE_CART_ITEM_QUANTITY',
-  SET_CART = 'SET_CART'
+  SET_CART = 'SET_CART',
 }
 
 export function addNewCartItemAction(newItem: CartItem) {
@@ -18,7 +19,7 @@ export function addNewCartItemAction(newItem: CartItem) {
     type: CartActionTypes.ADD_NEW_CART_ITEM,
     payload: {
       newItem,
-    }
+    },
   }
 }
 
@@ -27,12 +28,15 @@ export function removeCartItemAction(itemId: number) {
     type: CartActionTypes.REMOVE_CART_ITEM,
     payload: {
       itemId,
-    }
+    },
   }
 }
 
-export function updateCartItemQuantityAction(itemId: number, newQuantity: number) {
-  if(newQuantity === 0) {
+export function updateCartItemQuantityAction(
+  itemId: number,
+  newQuantity: number,
+) {
+  if (newQuantity === 0) {
     return removeCartItemAction(itemId)
   }
 
@@ -40,7 +44,7 @@ export function updateCartItemQuantityAction(itemId: number, newQuantity: number
     type: CartActionTypes.UPDATE_CART_ITEM_QUANTITY,
     payload: {
       itemId,
-      newQuantity
-    }
+      newQuantity,
+    },
   }
 }

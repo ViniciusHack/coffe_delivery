@@ -1,12 +1,12 @@
-import { CurrencyDollar } from 'phosphor-react';
-import styled from 'styled-components';
+import { CurrencyDollar } from 'phosphor-react'
+import styled from 'styled-components'
 
 export const CheckoutContainer = styled.div`
   h3 {
     font-size: 1.125rem;
     font-weight: 700;
   }
-`;
+`
 
 export const FormContainer = styled.form`
   display: flex;
@@ -17,7 +17,7 @@ export const FormContainer = styled.form`
 export const AddressForm = styled.section`
   margin-top: 1rem;
   padding: 2.5rem;
-  background: ${props => props.theme['base-200']};
+  background: ${(props) => props.theme['base-200']};
   border-radius: 6px;
 `
 
@@ -34,11 +34,11 @@ export const FormHeader = styled.header`
     padding-bottom: 2px;
   }
   p {
-    color: ${props => props.theme['base-700']}
+    color: ${(props) => props.theme['base-700']};
   }
 
   svg {
-    color: ${props => props.theme['primary-700']};
+    color: ${(props) => props.theme['primary-700']};
   }
 `
 
@@ -48,34 +48,32 @@ export const InputsWrapper = styled.div`
   gap: 1rem;
 
   > span {
-    font-size: .875rem;
+    font-size: 0.875rem;
     margin-top: -0.75rem;
-    color: ${props => props.theme['secondary-400']};
+    color: ${(props) => props.theme['secondary-400']};
   }
 `
 
 export const InputInLine = styled.div`
   display: flex;
   gap: 0.75rem;
-  
+
   div {
     flex: 1;
   }
 
   > span {
-    font-size: .875rem;
-    color: ${props => props.theme['secondary-400']};
+    font-size: 0.875rem;
+    color: ${(props) => props.theme['secondary-400']};
     align-self: center;
-  } 
+  }
 `
 
-export const Text = styled.div`
-
-`
+export const Text = styled.div``
 
 export const Payment = styled.div`
   margin-top: 0.75rem;
-  background: ${props => props.theme['base-200']};
+  background: ${(props) => props.theme['base-200']};
   border-radius: 6px;
   padding: 2.5rem;
 `
@@ -87,11 +85,11 @@ export const CartItemsContainer = styled.div`
 export const Content = styled.section`
   margin-top: 1rem;
   padding: 2.5rem;
-  background: ${props => props.theme['base-200']};
+  background: ${(props) => props.theme['base-200']};
   border-radius: 6px 44px;
   width: 100%;
 `
 
 export const CurrencyDollarStyled = styled(CurrencyDollar)`
-  color: ${props => props.theme['secondary-400']} !important;
+  color: ${(props) => props.theme['secondary-400']} !important;
 `

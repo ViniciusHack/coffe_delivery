@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 interface ButtonStyleProps {
   variant: 'default' | 'base' | 'outline'
@@ -18,7 +18,7 @@ const buttonSizes = {
   lg: {
     height: '2.875rem',
     'font-size': '0.875rem',
-  }
+  },
 }
 
 const buttonVariants = {
@@ -30,7 +30,7 @@ const buttonVariants = {
       icon: 'base-0',
       text: 'base-0',
       hover: {
-        bg:'primary-700',
+        bg: 'primary-700',
         icon: 'base-0',
         text: 'base-0',
       },
@@ -91,45 +91,52 @@ const buttonVariants = {
         bg: 'secondary-100',
         icon: 'secondary-400',
         text: 'secondary-400',
-      }
+      },
     },
-  }
+  },
 } as const
 
 export const ButtonStyle = styled.button<ButtonStyleProps>`
-  text-transform: ${props => buttonVariants[props.variant]['text-decoration']};
+  text-transform: ${(props) =>
+    buttonVariants[props.variant]['text-decoration']};
   border: 0;
 
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .25rem;
+  gap: 0.25rem;
   border-radius: 6px;
-  transition: .2s;
+  transition: 0.2s;
 
   width: 100%;
-  height: ${props => buttonSizes[props.size].height};
-  font-size: ${props => buttonSizes[props.size]['font-size']};
+  height: ${(props) => buttonSizes[props.size].height};
+  font-size: ${(props) => buttonSizes[props.size]['font-size']};
 
-  background-color: ${props => props.theme[buttonVariants[props.variant][props.mainColor].bg]};
-  font-weight: ${props => buttonVariants[props.variant]['font-weight']};
-  color: ${props => props.theme[buttonVariants[props.variant][props.mainColor].text]};
+  background-color: ${(props) =>
+    props.theme[buttonVariants[props.variant][props.mainColor].bg]};
+  font-weight: ${(props) => buttonVariants[props.variant]['font-weight']};
+  color: ${(props) =>
+    props.theme[buttonVariants[props.variant][props.mainColor].text]};
 
   svg {
-    color: ${props => props.theme[buttonVariants[props.variant][props.mainColor].icon]};
+    color: ${(props) =>
+      props.theme[buttonVariants[props.variant][props.mainColor].icon]};
   }
 
   &:not(:disabled):hover {
-    background-color: ${props => props.theme[buttonVariants[props.variant][props.mainColor].hover.bg]};
-    color: ${props => props.theme[buttonVariants[props.variant][props.mainColor].hover.text]};
+    background-color: ${(props) =>
+      props.theme[buttonVariants[props.variant][props.mainColor].hover.bg]};
+    color: ${(props) =>
+      props.theme[buttonVariants[props.variant][props.mainColor].hover.text]};
 
     svg {
-      color: ${props => props.theme[buttonVariants[props.variant][props.mainColor].hover.icon]};
+      color: ${(props) =>
+        props.theme[buttonVariants[props.variant][props.mainColor].hover.icon]};
     }
   }
 
   &:disabled {
     opacity: 0.6;
   }
-`;
+`

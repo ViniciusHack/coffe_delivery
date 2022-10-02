@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { ThemeType } from "../../@types/styles";
+import styled from 'styled-components'
+import { ThemeType } from '../../@types/styles'
 
 export const FeatureContainer = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ export const FeatureContainer = styled.div`
 `
 
 interface IconBoxProps {
-  color: keyof ThemeType;
+  color: keyof ThemeType
 }
 
 export const IconBox = styled.div<IconBoxProps>`
@@ -22,7 +22,7 @@ export const IconBox = styled.div<IconBoxProps>`
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: ${props => props.theme['base-0']};
+  color: ${(props) => props.theme['base-0']};
 
-  background-color: ${props => props.theme[props.color]}
+  background-color: ${(props) => props.theme[props.color]};
 `

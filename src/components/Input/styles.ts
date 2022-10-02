@@ -1,13 +1,13 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-interface InputContainer {
-  width?: string;
+interface InputContainerProps {
+  width?: string
 }
 
-export const InputContainer = styled.div<InputContainer>`
+export const InputContainer = styled.div<InputContainerProps>`
   position: relative;
-  width: ${props => props.width ? props.width : '100%'};
-  max-width: ${props => props.width ? props.width : '100%'};
+  width: ${(props) => (props.width ? props.width : '100%')};
+  max-width: ${(props) => (props.width ? props.width : '100%')};
 
   span {
     position: absolute;
@@ -15,24 +15,24 @@ export const InputContainer = styled.div<InputContainer>`
     padding: 13px 0.75rem;
     font-style: italic;
     font-size: 0.75rem;
-    color: ${props => props.theme['base-600']};
-    pointer-events: none; 
+    color: ${(props) => props.theme['base-600']};
+    pointer-events: none;
   }
-`;
+`
 
 export const InputStyle = styled.input`
   padding: 0.75rem;
-  color: ${props => props.theme['base-700']};
-  background: ${props => props.theme['base-300']};
-  border: 1px solid ${props => props.theme['base-400']};
+  color: ${(props) => props.theme['base-700']};
+  background: ${(props) => props.theme['base-300']};
+  border: 1px solid ${(props) => props.theme['base-400']};
   border-radius: 4px;
   font-size: 0.875rem;
   width: 100%;
 
   :focus {
-    border-color: ${props => props.theme['primary-700']};
+    border-color: ${(props) => props.theme['primary-700']};
   }
   ::placeholder {
-    color: ${props => props.theme['base-600']};
+    color: ${(props) => props.theme['base-600']};
   }
-`;
+`
